@@ -12,7 +12,7 @@ import Observation
 @Observable
 public final class LoadingState {
     public enum State: Equatable {
-        case start(String?)
+        case start
         case stop
     }
     
@@ -23,8 +23,8 @@ public final class LoadingState {
     /// Starts the loading state with an optional message.
     ///
     /// - Parameter message: An optional string message describing the current operation.
-    public func start(message: String? = nil) {
-        state = .start(message)
+    public func start() {
+        state = .start
     }
     
     /// Stops the loading state.

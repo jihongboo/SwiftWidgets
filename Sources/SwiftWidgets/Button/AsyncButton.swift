@@ -77,15 +77,17 @@ public extension AsyncButton where Label == Text {
     ///   - titleKey: The key for the localized title.
     ///   - systemImage: An optional SF Symbols image name.
     ///   - role: An optional role describing the button's purpose.
+    ///   - bundle: The bundle containing localizable resources.
     ///   - action: An asynchronous, throwing closure executed on tap.
     init(
         _ titleKey: LocalizedStringKey,
         systemImage: String? = nil,
         role: ButtonRole? = nil,
+        bundle: Bundle? = nil,
         action: @escaping () async throws -> Void,
     ) {
         self.init(role: role, action: action) {
-            Text(titleKey)
+            Text(titleKey, bundle: bundle)
         }
     }
 
@@ -96,6 +98,7 @@ public extension AsyncButton where Label == Text {
     ///   - systemImage: An optional SF Symbols image name.
     ///   - role: An optional role describing the button's purpose.
     ///   - action: An asynchronous, throwing closure executed on tap.
+    @_disfavoredOverload
     init<S: StringProtocol>(
         _ title: S,
         systemImage: String? = nil,
@@ -115,15 +118,21 @@ public extension AsyncButton where Label == SwiftUI.Label<Text, Image> {
     ///   - titleKey: The key for the localized title.
     ///   - systemImage: The SF Symbols icon name.
     ///   - role: An optional role describing the button's purpose.
+    ///   - bundle: The bundle containing localizable resources.
     ///   - action: An asynchronous, throwing closure executed on tap.
     init(
         _ titleKey: LocalizedStringKey,
         systemImage: String,
         role: ButtonRole? = nil,
+        bundle: Bundle? = nil,
         action: @escaping () async throws -> Void,
     ) {
         self.init(role: role, action: action) {
-            Label(titleKey, systemImage: systemImage)
+            Label {
+                Text(titleKey, bundle: bundle)
+            } icon: {
+                Image(systemName: systemImage)
+            }
         }
     }
 
@@ -134,6 +143,7 @@ public extension AsyncButton where Label == SwiftUI.Label<Text, Image> {
     ///   - systemImage: The SF Symbols icon name.
     ///   - role: An optional role describing the button's purpose.
     ///   - action: An asynchronous, throwing closure executed on tap.
+    @_disfavoredOverload
     init<S: StringProtocol>(
         _ title: S,
         systemImage: String,

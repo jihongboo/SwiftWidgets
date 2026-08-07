@@ -17,18 +17,13 @@ struct LoadModifier: ViewModifier {
         content
             .overlay {
                 if let error {
-                    ContentUnavailableView {
-                        Label(
-                            "Something went wrong",
-                            systemImage: "exclamationmark.triangle"
-                        )
-                    } description: {
-                        Text(error.localizedDescription)
-                    } actions: {
-                        Button("Retry") {
+                    ContentUnavailableView.error(error) {
+                        Button {
                             Task {
                                 await task()
                             }
+                        } label: {
+                            Text("Retry", bundle: .module)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

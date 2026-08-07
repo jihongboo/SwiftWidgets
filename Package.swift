@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftWidgets",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v17),
         .macOS(.v14)

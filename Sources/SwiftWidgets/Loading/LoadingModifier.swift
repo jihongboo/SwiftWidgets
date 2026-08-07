@@ -8,7 +8,7 @@ private struct LoadingModifier: ViewModifier {
             .environment(\.loading, loading)
             .overlay {
                 switch loading.state {
-                case .start(_):
+                case .start:
                     ProgressView()
                 case .stop:
                     EmptyView()

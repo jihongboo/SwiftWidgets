@@ -21,7 +21,7 @@ private struct AlertErrorModifier: ViewModifier {
         //        } else {
         content
             .alert(
-                "Error",
+                Text("Error", bundle: .module),
                 isPresented: Binding(get: {
                     alert.error != nil
                 }, set: { isPresented in
@@ -31,12 +31,16 @@ private struct AlertErrorModifier: ViewModifier {
                 }),
                 actions: {
                     if #available(anyAppleOS 26.0, *) {
-                        Button("Confirm", role: .confirm) {
+                        Button(role: .confirm) {
                             alert.error = nil
+                        } label: {
+                            Text("Confirm", bundle: .module)
                         }
                     } else {
-                        Button("Confirm") {
+                        Button {
                             alert.error = nil
+                        } label: {
+                            Text("Confirm", bundle: .module)
                         }
                     }
                 },

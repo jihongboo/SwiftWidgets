@@ -47,17 +47,19 @@ private struct AlertModifier: ViewModifier {
                     }
                 }),
                 actions: {
-                    Button("Cancel", role: .cancel) {
+                    Button(role: .cancel) {
                         alert.confirm = nil
+                    } label: {
+                        Text("Cancel", bundle: .module)
                     }
                     if let onConfirm = alert.confirm?.onConfirm {
                         if #available(anyAppleOS 26.0, *) {
                             AsyncButton(role: .confirm, action: onConfirm) {
-                                Text("Confirm")
+                                Text("Confirm", bundle: .module)
                             }
                         } else {
                             AsyncButton(action: onConfirm) {
-                                Text("Confirm")
+                                Text("Confirm", bundle: .module)
                             }
                         }
                     }
