@@ -19,6 +19,9 @@ private struct LoadingModifier: ViewModifier {
 }
 
 public extension View {
+    /// Attaches a ``LoadingState`` environment modifier to the view hierarchy, displaying a progress overlay when active.
+    ///
+    /// - Returns: A view modified with automatic loading overlay capabilities.
     func loading() -> some View {
         modifier(LoadingModifier())
     }

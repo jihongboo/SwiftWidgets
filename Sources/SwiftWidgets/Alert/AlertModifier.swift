@@ -82,6 +82,12 @@ private struct AlertModifier: ViewModifier {
 }
 
 public extension View {
+    /// Attaches the ``AlertState`` environment modifier to the view hierarchy, listening for global popups and confirmations.
+    ///
+    /// Applying `.alert()` injects an ``AlertState`` instance into the environment, automatically responding
+    /// when error popups, informational alerts, or confirmation dialogs are requested via `@Environment(\.alert)`.
+    ///
+    /// - Returns: A view wrapped with alert handling capabilities.
     func alert() -> some View {
         modifier(AlertModifier())
     }

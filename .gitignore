@@ -1,0 +1,30 @@
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+/*.xcodeproj
+
+# Xcode & SwiftPM User Data
+*.xcworkspace
+xcuserdata/
+.swiftpm/xcode/
+.swiftpm/configuration/
+
+# Build Artefacts and Derived Data
+DerivedData/
+*.xcresult/
+*.ipa
+*.dSYM/
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Files containing user settings / caches
+.gemini/
+*.mode1v3
+*.mode2v3
+*.perspectivev3

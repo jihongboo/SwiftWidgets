@@ -1,8 +1,10 @@
 import SwiftUI
 
-/// `SwiftWidgets` 提供可重用的 UI 组件与动画控件。
+/// A namespace structure providing shared meta information for the `SwiftWidgets` package.
 public struct SwiftWidgets {
+    /// A default greeting string for library identification.
     public private(set) var text = "Hello, SwiftWidgets!"
 
+    /// Initializes a new instance of ``SwiftWidgets``.
     public init() {}
 }

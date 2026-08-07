@@ -8,26 +8,32 @@
 import SwiftUI
 import Observation
 
+/// An observable object representing the active loading state of a view or hierarchy.
 @Observable
-final class LoadingState {
-    enum State: Equatable {
+public final class LoadingState {
+    public enum State: Equatable {
         case start(String?)
         case stop
     }
     
-    var state: State = .stop
+    public var state: State = .stop
     
     fileprivate static let preview = LoadingState()
     
-    func start(message: String? = nil) {
+    /// Starts the loading state with an optional message.
+    ///
+    /// - Parameter message: An optional string message describing the current operation.
+    public func start(message: String? = nil) {
         state = .start(message)
     }
     
-    func stop() {
+    /// Stops the loading state.
+    public func stop() {
         state = .stop
     }
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
+    /// Provides access to the ``LoadingState`` instance in the SwiftUI environment.
     @Entry var loading: LoadingState = .preview
 }

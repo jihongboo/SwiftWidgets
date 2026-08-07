@@ -55,6 +55,10 @@ private extension LoadModifier {
 }
 
 public extension View {
+    /// Runs an asynchronous data loading task when the view appears, displaying loading overlay and error retry interfaces automatically.
+    ///
+    /// - Parameter action: An asynchronous throwing closure executed when the view appears.
+    /// - Returns: A view modified to handle loading and error overlay states automatically.
     func load(
         _ action: @escaping @Sendable () async throws -> Void
     ) -> some View {

@@ -1,7 +1,13 @@
 import SwiftUI
 
-extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Description == Text?, Actions == EmptyView {
-    /// 默认的错误状态视图（无操作按钮）
+public extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Description == Text?, Actions == EmptyView {
+    /// Creates an error-state view with an error description and no action buttons.
+    ///
+    /// - Parameters:
+    ///   - error: The error whose `localizedDescription` will be displayed.
+    ///   - title: The title text for the error header. Defaults to `"Something went wrong"`.
+    ///   - systemImage: The SF Symbols icon name. Defaults to `"exclamationmark.triangle"`.
+    /// - Returns: A configured `ContentUnavailableView`.
     @ViewBuilder
     static func error(
         _ error: Error,
@@ -16,8 +22,15 @@ extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Desc
     }
 }
 
-extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Description == Text?, Actions == AsyncButton<SwiftUI.Label<Text, Image>> {
-    /// 默认的错误状态视图（带异步重试按钮）
+public extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Description == Text?, Actions == AsyncButton<SwiftUI.Label<Text, Image>> {
+    /// Creates an error-state view displaying the error description and an asynchronous retry button.
+    ///
+    /// - Parameters:
+    ///   - error: The error whose `localizedDescription` will be displayed.
+    ///   - title: The title text for the error header. Defaults to `"Something went wrong"`.
+    ///   - systemImage: The SF Symbols icon name. Defaults to `"exclamationmark.triangle"`.
+    ///   - retry: An asynchronous closure to execute when tapping the retry button.
+    /// - Returns: A configured `ContentUnavailableView`.
     @ViewBuilder
     static func error(
         _ error: Error,
@@ -35,8 +48,15 @@ extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Desc
     }
 }
 
-extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Description == Text? {
-    /// 默认的错误状态视图（自定义 Action 视图）
+public extension ContentUnavailableView where Label == SwiftUI.Label<Text, Image>, Description == Text? {
+    /// Creates an error-state view displaying the error description with custom action controls.
+    ///
+    /// - Parameters:
+    ///   - error: The error whose `localizedDescription` will be displayed.
+    ///   - title: The title text for the error header. Defaults to `"Something went wrong"`.
+    ///   - systemImage: The SF Symbols icon name. Defaults to `"exclamationmark.triangle"`.
+    ///   - actions: A view builder producing custom action controls.
+    /// - Returns: A configured `ContentUnavailableView`.
     @ViewBuilder
     static func error(
         _ error: Error,
