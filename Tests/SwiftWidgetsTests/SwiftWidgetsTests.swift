@@ -137,3 +137,14 @@ struct CustomError: Error {
     let refreshStr = hantBundle.localizedString(forKey: "Refresh", value: nil, table: nil)
     #expect(refreshStr == "重新整理")
 }
+
+@Test func testAsyncButtonSystemImage() async throws {
+    var actionExecuted = false
+    let button = AsyncButton(systemImage: "star.fill") {
+        actionExecuted = true
+    }
+    #expect(button.role == nil)
+    try await button.action()
+    #expect(actionExecuted)
+}
+

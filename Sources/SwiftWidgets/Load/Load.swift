@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoadModifier: ViewModifier {
-    let action: @Sendable () async throws -> Void
+    let action: () async throws -> Void
     
     @State private var error: Error?
     @Environment(\.loading) private var loading
@@ -55,7 +55,7 @@ public extension View {
     /// - Parameter action: An asynchronous throwing closure executed when the view appears.
     /// - Returns: A view modified to handle loading and error overlay states automatically.
     func load(
-        _ action: @escaping @Sendable () async throws -> Void
+        _ action: @escaping () async throws -> Void
     ) -> some View {
         modifier(LoadModifier(action: action))
     }

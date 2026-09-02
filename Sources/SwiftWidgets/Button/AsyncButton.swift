@@ -156,12 +156,35 @@ public extension AsyncButton where Label == SwiftUI.Label<Text, Image> {
     }
 }
 
+public extension AsyncButton where Label == Image {
+    /// Creates an asynchronous button displaying an SF Symbols image.
+    ///
+    /// - Parameters:
+    ///   - systemImage: The name of the system symbol image.
+    ///   - role: An optional role describing the button's purpose.
+    ///   - action: An asynchronous, throwing closure executed on tap.
+    init(
+        systemImage: String,
+        role: ButtonRole? = nil,
+        action: @escaping () async throws -> Void,
+    ) {
+        self.init(role: role, action: action) {
+            Image(systemName: systemImage)
+        }
+    }
+}
+
 #Preview {
     VStack(spacing: 20) {
         AsyncButton("Click to Load") {
             try? await Task.sleep(nanoseconds: 2_000_000_000)
         }
         .buttonStyle(.borderedProminent)
+        
+        AsyncButton(systemImage: "star.fill") {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+        .buttonStyle(.bordered)
         
         AsyncButton {
             try? await Task.sleep(nanoseconds: 2_000_000_000)
