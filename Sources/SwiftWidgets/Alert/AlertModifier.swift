@@ -6,7 +6,6 @@ private struct AlertModifier: ViewModifier {
     func body(content: Content) -> some View {
         @Bindable var alert = alert
         content
-            .environment(\.alert, alert)
             .alertError()
             .alert(
                 alert.general?.title ?? "",
@@ -80,6 +79,7 @@ private struct AlertModifier: ViewModifier {
         //                        Text(message)
         //                    }
         //                }
+            .environment(\.alert, alert)
     }
 }
 
