@@ -43,7 +43,12 @@ private extension LoadModifier {
         do {
             try await action()
         } catch {
-            self.error = error
+            if let error = error as? URLError,
+               error.code == .cancelled {
+                // do nothing
+            } else {
+                self.error = error
+            }
             print(error)
         }
     }
