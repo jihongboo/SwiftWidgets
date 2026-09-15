@@ -10,6 +10,7 @@ import SwiftUI
 struct LoadModifier: ViewModifier {
     let action: () async throws -> Void
     
+    @State private var didLoad = false
     @State private var error: Error?
     @Environment(\.loading) private var loading
 
@@ -36,6 +37,9 @@ struct LoadModifier: ViewModifier {
 
 private extension LoadModifier {
     func task() async {
+        if didLoad { return }
+        defer { didLoad = true }
+        
         loading.start()
         defer {
             loading.stop()
