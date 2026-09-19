@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct LoadModifier: ViewModifier {
+struct RefreshModifier: ViewModifier {
     let action: () async throws -> Void
     
     @State private var didLoad = false
     @State private var error: Error?
     @Environment(\.loading) private var loading
-
+    
     func body(content: Content) -> some View {
         content
             .overlay {
@@ -31,18 +31,38 @@ struct LoadModifier: ViewModifier {
                     .background(.background)
                 }
             }
-            .task(task)
+            .task {
+                await task()
+            }
+            .refreshable {
+                await task(shouldShowLoading: false, force: true)
+            }
+#if os(tvOS)
+            .onPlayPauseCommand {
+                Task {
+                    await task()
+                }
+            }
+#endif
     }
 }
 
-private extension LoadModifier {
-    func task() async {
-        if didLoad { return }
+private extension RefreshModifier {
+    func task(shouldShowLoading: Bool = true, force: Bool = false) async {
+        if force {
+            
+        } else {
+            if didLoad { return }
+        }
         defer { didLoad = true }
         
-        loading.start()
+        if shouldShowLoading {
+            loading.start()
+        }
         defer {
-            loading.stop()
+            if shouldShowLoading {
+                loading.stop()
+            }
         }
         do {
             try await action()
@@ -65,10 +85,10 @@ public extension View {
     ///
     /// - Parameter action: An asynchronous throwing closure executed when the view appears.
     /// - Returns: A view modified to handle loading and error overlay states automatically.
-    func load(
+    func refresh(
         _ action: @escaping () async throws -> Void
     ) -> some View {
-        modifier(LoadModifier(action: action))
+        modifier(RefreshModifier(action: action))
     }
 }
 
